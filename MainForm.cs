@@ -109,15 +109,6 @@ public partial class MainForm : Form
         _chkNormalizeArtists.Checked = _settings.NormalizeArtists;
         _chkPrimaryArtistOnly.Checked = _settings.KeepPrimaryArtistOnly;
         _chkAnalyzeLibrary.Checked = _settings.AnalyzeLibrary;
-        _chkStyleRecursive.Checked = _settings.Recursive;
-        _chkStyleUseTags.Checked = _settings.UseTagsFirst;
-        _chkStyleFetchMusicBrainz.Checked = _settings.FetchMusicBrainzMetadata;
-        _chkSortRecursive.Checked = _settings.Recursive;
-        _chkSortUseTags.Checked = _settings.UseTagsFirst;
-        _chkSortFixTags.Checked = _settings.FixTags;
-        _chkSortFingerprintDuplicates.Checked = _settings.UseFingerprintDuplicates;
-        _chkSortNormalizeArtists.Checked = _settings.NormalizeArtists;
-        _chkSortPrimaryArtistOnly.Checked = _settings.KeepPrimaryArtistOnly;
         UpdateModeControls();
     }
 
@@ -572,70 +563,35 @@ public partial class MainForm : Form
 
     private void UpdateOptionControls(bool enabled)
     {
-        _chkRecursive.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || IsDateMode());
-        _chkUseTags.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || IsDateMode());
+        _chkRecursive.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || IsDateMode() || _selectedMode == ProcessingMode.Style || _selectedMode == ProcessingMode.Sort);
+        _chkUseTags.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || IsDateMode() || _selectedMode == ProcessingMode.Style || _selectedMode == ProcessingMode.Sort);
         _chkMoveCoverArt.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
-        _chkFixTags.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
-        _chkFingerprintDuplicates.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
-        _chkFetchMusicBrainz.Enabled = enabled && IsDateMode();
+        _chkFixTags.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || _selectedMode == ProcessingMode.Sort);
+        _chkFingerprintDuplicates.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || _selectedMode == ProcessingMode.Sort);
+        _chkFetchMusicBrainz.Enabled = enabled && (IsDateMode() || _selectedMode == ProcessingMode.Style);
         _chkFindOriginalYear.Enabled = enabled && IsDateMode();
-        _chkNormalizeArtists.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
-        _chkPrimaryArtistOnly.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
+        _chkNormalizeArtists.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || _selectedMode == ProcessingMode.Sort);
+        _chkPrimaryArtistOnly.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || _selectedMode == ProcessingMode.Sort);
         _chkAnalyzeLibrary.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
-        _chkStyleRecursive.Enabled = enabled && _selectedMode == ProcessingMode.Style;
-        _chkStyleUseTags.Enabled = enabled && _selectedMode == ProcessingMode.Style;
-        _chkStyleFetchMusicBrainz.Enabled = enabled && _selectedMode == ProcessingMode.Style;
-        _chkSortRecursive.Enabled = enabled && _selectedMode == ProcessingMode.Sort;
-        _chkSortUseTags.Enabled = enabled && _selectedMode == ProcessingMode.Sort;
-        _chkSortFixTags.Enabled = enabled && _selectedMode == ProcessingMode.Sort;
-        _chkSortFingerprintDuplicates.Enabled = enabled && _selectedMode == ProcessingMode.Sort;
-        _chkSortNormalizeArtists.Enabled = enabled && _selectedMode == ProcessingMode.Sort;
-        _chkSortPrimaryArtistOnly.Enabled = enabled && _selectedMode == ProcessingMode.Sort;
     }
 
-    private bool GetRecursiveOption() => _selectedMode switch
-    {
-        ProcessingMode.Style => _chkStyleRecursive.Checked,
-        ProcessingMode.Sort => _chkSortRecursive.Checked,
-        _ => _chkRecursive.Checked
-    };
+    private bool GetRecursiveOption() => _chkRecursive.Checked;
 
-    private bool GetUseTagsOption() => _selectedMode switch
-    {
-        ProcessingMode.Style => _chkStyleUseTags.Checked,
-        ProcessingMode.Sort => _chkSortUseTags.Checked,
-        _ => _chkUseTags.Checked
-    };
+    private bool GetUseTagsOption() => _chkUseTags.Checked;
 
     private bool GetFetchMusicBrainzOption() => _selectedMode switch
     {
-        ProcessingMode.Style => _chkStyleFetchMusicBrainz.Checked,
+        ProcessingMode.Style => _chkFetchMusicBrainz.Checked,
         _ => IsDateMode() && _chkFetchMusicBrainz.Checked
     };
 
-    private bool GetFixTagsOption() => _selectedMode switch
-    {
-        ProcessingMode.Sort => _chkSortFixTags.Checked,
-        _ => _chkFixTags.Checked
-    };
+    private bool GetFixTagsOption() => _chkFixTags.Checked;
 
-    private bool GetFingerprintDuplicatesOption() => _selectedMode switch
-    {
-        ProcessingMode.Sort => _chkSortFingerprintDuplicates.Checked,
-        _ => _chkFingerprintDuplicates.Checked
-    };
+    private bool GetFingerprintDuplicatesOption() => _chkFingerprintDuplicates.Checked;
 
-    private bool GetNormalizeArtistsOption() => _selectedMode switch
-    {
-        ProcessingMode.Sort => _chkSortNormalizeArtists.Checked,
-        _ => _chkNormalizeArtists.Checked
-    };
+    private bool GetNormalizeArtistsOption() => _chkNormalizeArtists.Checked;
 
-    private bool GetPrimaryArtistOnlyOption() => _selectedMode switch
-    {
-        ProcessingMode.Sort => _chkSortPrimaryArtistOnly.Checked,
-        _ => _chkPrimaryArtistOnly.Checked
-    };
+    private bool GetPrimaryArtistOnlyOption() => _chkPrimaryArtistOnly.Checked;
 
     private void SelectMode(ProcessingMode mode)
     {
@@ -653,7 +609,7 @@ public partial class MainForm : Form
 
         if (mode == ProcessingMode.Style)
         {
-            _chkStyleFetchMusicBrainz.Checked = true;
+            _chkFetchMusicBrainz.Checked = true;
         }
 
         if (IsDateMode())

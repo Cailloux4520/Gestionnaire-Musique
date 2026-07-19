@@ -41,15 +41,6 @@ namespace MusicOrganizer
         private CheckBox _chkNormalizeArtists = null!;
         private CheckBox _chkPrimaryArtistOnly = null!;
         private CheckBox _chkAnalyzeLibrary = null!;
-        private CheckBox _chkStyleRecursive = null!;
-        private CheckBox _chkStyleUseTags = null!;
-        private CheckBox _chkStyleFetchMusicBrainz = null!;
-        private CheckBox _chkSortRecursive = null!;
-        private CheckBox _chkSortUseTags = null!;
-        private CheckBox _chkSortFixTags = null!;
-        private CheckBox _chkSortFingerprintDuplicates = null!;
-        private CheckBox _chkSortNormalizeArtists = null!;
-        private CheckBox _chkSortPrimaryArtistOnly = null!;
 
         private FlowLayoutPanel _pnlActions = null!;
         private RoundedButton _btnStart = null!;
@@ -90,7 +81,7 @@ namespace MusicOrganizer
             {
                 Dock = DockStyle.Top,
                 ColumnCount = 1,
-                Padding = new Padding(14),
+                Padding = new Padding(10),
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink
             };
@@ -177,8 +168,8 @@ namespace MusicOrganizer
                 Dock = DockStyle.Top,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Margin = new Padding(0, 10, 0, 0),
-                Padding = new Padding(10, 8, 10, 10)
+                Margin = new Padding(0, 6, 0, 0),
+                Padding = new Padding(8, 5, 8, 7)
             };
 
             var layout = new TableLayoutPanel
@@ -214,12 +205,12 @@ namespace MusicOrganizer
             {
                 Text = text,
                 Dock = DockStyle.Fill,
-                Height = 44,
+                Height = 34,
                 BorderRadius = 8,
                 SelectedBackColor = Color.FromArgb(21, 101, 192),
                 NormalBackColor = Color.FromArgb(46, 125, 50),
                 NormalForeColor = Color.White,
-                Margin = new Padding(4, 4, 4, 4),
+                Margin = new Padding(3, 2, 3, 2),
                 Font = new Font("Segoe UI", 9.5f, FontStyle.Bold)
             };
         }
@@ -232,8 +223,8 @@ namespace MusicOrganizer
                 Dock = DockStyle.Top,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Margin = new Padding(0, 10, 0, 0),
-                Padding = new Padding(10, 8, 10, 10)
+                Margin = new Padding(0, 6, 0, 0),
+                Padding = new Padding(8, 5, 8, 7)
             };
 
             _optionsLayout = new TableLayoutPanel
@@ -254,40 +245,21 @@ namespace MusicOrganizer
             _chkMoveCoverArt = CreateOptionCheckBox("Copier les pochettes associées (déplace les images avec le morceau)", true);
             _chkFixTags = CreateOptionCheckBox("Corriger les tags artiste/titre (aligne sur le morceau réel)", false);
             _chkFingerprintDuplicates = CreateOptionCheckBox("Détecter les doublons par empreinte (compare le contenu audio)", true);
-            _chkFetchMusicBrainz = CreateOptionCheckBox("Compléter via MusicBrainz (cherche les métadonnées manquantes)", false);
+            _chkFetchMusicBrainz = CreateOptionCheckBox("Chercher sur internet / MusicBrainz (complète date ou style)", false);
             _chkFindOriginalYear = CreateOptionCheckBox("Recherche exacte de la date de sortie (trouve l'année originale)", true);
             _chkNormalizeArtists = CreateOptionCheckBox("Normaliser artiste/titre (corrige la casse et les espaces)", true);
             _chkPrimaryArtistOnly = CreateOptionCheckBox("Garder seulement l'artiste principal (retire les feats du nom artiste)", true);
             _chkAnalyzeLibrary = CreateOptionCheckBox("Analyser la bibliothèque finale (compte artistes, albums et morceaux)", true);
-            _chkStyleRecursive = CreateOptionCheckBox("Inclure les sous-dossiers (parcourt les dossiers enfants)", true);
-            _chkStyleUseTags = CreateOptionCheckBox("Lire les tags avant le nom du fichier (identifie mieux le morceau)", true);
-            _chkStyleFetchMusicBrainz = CreateOptionCheckBox("Chercher le style sur internet (MusicBrainz puis iTunes)", true);
-            _chkSortRecursive = CreateOptionCheckBox("Inclure les sous-dossiers (parcourt les dossiers enfants)", true);
-            _chkSortUseTags = CreateOptionCheckBox("Lire les tags avant le nom du fichier (priorise les métadonnées)", true);
-            _chkSortFixTags = CreateOptionCheckBox("Corriger les tags artiste/titre (aligne sur le morceau réel)", false);
-            _chkSortFingerprintDuplicates = CreateOptionCheckBox("Détecter les doublons par empreinte (compare le contenu audio)", true);
-            _chkSortNormalizeArtists = CreateOptionCheckBox("Normaliser artiste/titre (corrige la casse et les espaces)", true);
-            _chkSortPrimaryArtistOnly = CreateOptionCheckBox("Garder seulement l'artiste principal (retire les feats du nom artiste)", true);
-
-            AddOptionCheckBox(_chkMoveCoverArt, 0, 0);
-            AddOptionCheckBox(_chkAnalyzeLibrary, 0, 1);
-            AddOptionCheckBox(_chkRecursive, 0, 2);
-            AddOptionCheckBox(_chkUseTags, 0, 3);
-            AddOptionCheckBox(_chkFixTags, 0, 4);
-            AddOptionCheckBox(_chkFingerprintDuplicates, 0, 5);
-            AddOptionCheckBox(_chkNormalizeArtists, 0, 6);
-            AddOptionCheckBox(_chkPrimaryArtistOnly, 0, 7);
-            AddOptionCheckBox(_chkFindOriginalYear, 1, 0);
-            AddOptionCheckBox(_chkFetchMusicBrainz, 1, 1);
-            AddOptionCheckBox(_chkStyleRecursive, 2, 0);
-            AddOptionCheckBox(_chkStyleUseTags, 2, 1);
-            AddOptionCheckBox(_chkStyleFetchMusicBrainz, 2, 2);
-            AddOptionCheckBox(_chkSortRecursive, 3, 0);
-            AddOptionCheckBox(_chkSortUseTags, 3, 1);
-            AddOptionCheckBox(_chkSortFixTags, 3, 2);
-            AddOptionCheckBox(_chkSortFingerprintDuplicates, 3, 3);
-            AddOptionCheckBox(_chkSortNormalizeArtists, 3, 4);
-            AddOptionCheckBox(_chkSortPrimaryArtistOnly, 3, 5);
+            AddOptionCheckBox(_chkRecursive, 0, 0);
+            AddOptionCheckBox(_chkUseTags, 0, 1);
+            AddOptionCheckBox(_chkMoveCoverArt, 1, 0);
+            AddOptionCheckBox(_chkAnalyzeLibrary, 1, 1);
+            AddOptionCheckBox(_chkNormalizeArtists, 1, 2);
+            AddOptionCheckBox(_chkPrimaryArtistOnly, 1, 3);
+            AddOptionCheckBox(_chkFetchMusicBrainz, 2, 0);
+            AddOptionCheckBox(_chkFindOriginalYear, 2, 1);
+            AddOptionCheckBox(_chkFixTags, 3, 0);
+            AddOptionCheckBox(_chkFingerprintDuplicates, 3, 1);
 
             _grpOptions.Controls.Add(_optionsLayout);
         }
@@ -301,7 +273,7 @@ namespace MusicOrganizer
                 AutoSize = true,
                 Dock = DockStyle.Fill,
                 AutoEllipsis = true,
-                Margin = new Padding(4, 6, 18, 6)
+                Margin = new Padding(3, 2, 12, 2)
             };
         }
 
@@ -317,14 +289,14 @@ namespace MusicOrganizer
                 Dock = DockStyle.Top,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Margin = new Padding(0, 10, 0, 0)
+                Margin = new Padding(0, 6, 0, 0)
             };
 
-            _btnStart = new RoundedButton { Text = "Lancer", Width = 120, Height = 36, SelectedMode = true, SelectedBackColor = Color.FromArgb(46, 125, 50), Margin = new Padding(0, 0, 8, 0) };
-            _btnStop = new RoundedButton { Text = "Arrêter", Width = 120, Height = 36, Enabled = false, SelectedMode = true, SelectedBackColor = Color.FromArgb(198, 40, 40), Margin = new Padding(0, 0, 8, 0) };
-            _btnShowFolderStats = new RoundedButton { Text = "Afficher dossiers", AutoSize = true, Height = 36, SelectedMode = true, SelectedBackColor = Color.FromArgb(69, 90, 100), Margin = new Padding(0, 0, 8, 0) };
+            _btnStart = new RoundedButton { Text = "Lancer", Width = 120, Height = 32, SelectedMode = true, SelectedBackColor = Color.FromArgb(46, 125, 50), Margin = new Padding(0, 0, 8, 0) };
+            _btnStop = new RoundedButton { Text = "Arrêter", Width = 120, Height = 32, Enabled = false, SelectedMode = true, SelectedBackColor = Color.FromArgb(198, 40, 40), Margin = new Padding(0, 0, 8, 0) };
+            _btnShowFolderStats = new RoundedButton { Text = "Afficher dossiers", AutoSize = true, Height = 32, SelectedMode = true, SelectedBackColor = Color.FromArgb(69, 90, 100), Margin = new Padding(0, 0, 8, 0) };
 
-            _btnOpenDest = new Button { Text = "Ouvrir le dossier destination", AutoSize = true, Height = 34, Margin = new Padding(0, 0, 8, 0) };
+            _btnOpenDest = new Button { Text = "Ouvrir le dossier destination", AutoSize = true, Height = 30, Margin = new Padding(0, 0, 8, 0) };
 
             _pnlActions.Controls.Add(_btnStart);
             _pnlActions.Controls.Add(_btnStop);
@@ -338,7 +310,7 @@ namespace MusicOrganizer
             {
                 Dock = DockStyle.Top,
                 Height = 22,
-                Margin = new Padding(0, 10, 0, 0),
+                Margin = new Padding(0, 6, 0, 0),
                 Minimum = 0,
                 Maximum = 100
             };
@@ -352,8 +324,8 @@ namespace MusicOrganizer
                 Dock = DockStyle.Top,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Margin = new Padding(0, 10, 0, 0),
-                Padding = new Padding(10, 5, 10, 10)
+                Margin = new Padding(0, 6, 0, 0),
+                Padding = new Padding(8, 4, 8, 7)
             };
 
             var grid = new TableLayoutPanel
@@ -395,10 +367,10 @@ namespace MusicOrganizer
             {
                 Text = "Journal en temps réel",
                 Dock = DockStyle.Top,
-                Height = 300,
-                MinimumSize = new Size(0, 240),
-                Margin = new Padding(0, 10, 0, 0),
-                Padding = new Padding(10, 5, 10, 10)
+                Height = 440,
+                MinimumSize = new Size(0, 360),
+                Margin = new Padding(0, 6, 0, 0),
+                Padding = new Padding(8, 4, 8, 7)
             };
 
             _txtLog = new TextBox
