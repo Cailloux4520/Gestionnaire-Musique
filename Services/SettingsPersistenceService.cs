@@ -5,19 +5,29 @@ namespace MusicOrganizer.Services;
 
 /// <summary>
 /// Saves and loads the user's last folders as JSON under
-/// %AppData%\MusicOrganizer\settings.json, so the application remembers them
+/// %AppData%\Gestionnaire Musique\settings.json, so the application remembers them
 /// across launches.
 /// </summary>
 public static class SettingsPersistenceService
 {
+    private const string AppDataFolderName = "Gestionnaire Musique";
+    private const string LegacyAppDataFolderName = "MusicOrganizer";
+
     private static string SettingsFilePath
     {
         get
         {
             var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var folder = Path.Combine(appData, "MusicOrganizer");
+            var folder = Path.Combine(appData, AppDataFolderName);
             Directory.CreateDirectory(folder);
-            return Path.Combine(folder, "settings.json");
+            var settingsPath = Path.Combine(folder, "settings.json");
+            var legacySettingsPath = Path.Combine(appData, LegacyAppDataFolderName, "settings.json");
+            if (!File.Exists(settingsPath) && File.Exists(legacySettingsPath))
+            {
+                File.Copy(legacySettingsPath, settingsPath);
+            }
+
+            return settingsPath;
         }
     }
 

@@ -78,7 +78,7 @@ namespace MusicOrganizer
 
             SuspendLayout();
 
-            Text = "MusicOrganizer";
+            Text = "Gestionnaire Musique";
             MinimumSize = new Size(1220, 760);
             Size = new Size(1380, 900);
             StartPosition = FormStartPosition.CenterScreen;
@@ -184,14 +184,14 @@ namespace MusicOrganizer
             var layout = new TableLayoutPanel
             {
                 Dock = DockStyle.Top,
-                ColumnCount = 5,
-                RowCount = 1,
+                ColumnCount = 4,
+                RowCount = 2,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink
             };
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i < 4; i++)
             {
-                layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20f));
+                layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25f));
             }
 
             _btnModeArtist = CreateModeButton("Créer par artiste (Base)");
@@ -202,9 +202,9 @@ namespace MusicOrganizer
 
             layout.Controls.Add(_btnModeArtist, 0, 0);
             layout.Controls.Add(_btnModeDate, 1, 0);
-            layout.Controls.Add(_btnModeDateFile, 2, 0);
-            layout.Controls.Add(_btnModeStyle, 3, 0);
-            layout.Controls.Add(_btnModeSort, 4, 0);
+            layout.Controls.Add(_btnModeDateFile, 1, 1);
+            layout.Controls.Add(_btnModeStyle, 2, 0);
+            layout.Controls.Add(_btnModeSort, 3, 0);
             _grpModes.Controls.Add(layout);
         }
 
@@ -239,16 +239,15 @@ namespace MusicOrganizer
             _optionsLayout = new TableLayoutPanel
             {
                 Dock = DockStyle.Top,
-                ColumnCount = 5,
+                ColumnCount = 4,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 MinimumSize = new Size(0, 36)
             };
-            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20f));
-            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20f));
-            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20f));
-            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20f));
-            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20f));
+            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25f));
+            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25f));
+            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25f));
+            _optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25f));
 
             _chkRecursive = CreateOptionCheckBox("Inclure les sous-dossiers (parcourt les dossiers enfants)", true);
             _chkUseTags = CreateOptionCheckBox("Lire les tags avant le nom du fichier (priorise les métadonnées)", true);
@@ -274,17 +273,21 @@ namespace MusicOrganizer
             AddOptionCheckBox(_chkAnalyzeLibrary, 0, 1);
             AddOptionCheckBox(_chkRecursive, 0, 2);
             AddOptionCheckBox(_chkUseTags, 0, 3);
+            AddOptionCheckBox(_chkFixTags, 0, 4);
+            AddOptionCheckBox(_chkFingerprintDuplicates, 0, 5);
+            AddOptionCheckBox(_chkNormalizeArtists, 0, 6);
+            AddOptionCheckBox(_chkPrimaryArtistOnly, 0, 7);
             AddOptionCheckBox(_chkFindOriginalYear, 1, 0);
             AddOptionCheckBox(_chkFetchMusicBrainz, 1, 1);
-            AddOptionCheckBox(_chkStyleRecursive, 3, 0);
-            AddOptionCheckBox(_chkStyleUseTags, 3, 1);
-            AddOptionCheckBox(_chkStyleFetchMusicBrainz, 3, 2);
-            AddOptionCheckBox(_chkSortRecursive, 4, 0);
-            AddOptionCheckBox(_chkSortUseTags, 4, 1);
-            AddOptionCheckBox(_chkSortFixTags, 4, 2);
-            AddOptionCheckBox(_chkSortFingerprintDuplicates, 4, 3);
-            AddOptionCheckBox(_chkSortNormalizeArtists, 4, 4);
-            AddOptionCheckBox(_chkSortPrimaryArtistOnly, 4, 5);
+            AddOptionCheckBox(_chkStyleRecursive, 2, 0);
+            AddOptionCheckBox(_chkStyleUseTags, 2, 1);
+            AddOptionCheckBox(_chkStyleFetchMusicBrainz, 2, 2);
+            AddOptionCheckBox(_chkSortRecursive, 3, 0);
+            AddOptionCheckBox(_chkSortUseTags, 3, 1);
+            AddOptionCheckBox(_chkSortFixTags, 3, 2);
+            AddOptionCheckBox(_chkSortFingerprintDuplicates, 3, 3);
+            AddOptionCheckBox(_chkSortNormalizeArtists, 3, 4);
+            AddOptionCheckBox(_chkSortPrimaryArtistOnly, 3, 5);
 
             _grpOptions.Controls.Add(_optionsLayout);
         }

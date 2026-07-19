@@ -12,7 +12,7 @@ internal static class Program
             var ex = e.ExceptionObject as Exception;
             MessageBox.Show(
                 $"Une erreur inattendue est survenue et l'application doit continuer prudemment.\n\n{ex?.Message}",
-                "MusicOrganizer - Erreur",
+                "Gestionnaire Musique - Erreur",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         };
@@ -21,7 +21,7 @@ internal static class Program
         {
             MessageBox.Show(
                 $"Une erreur inattendue est survenue.\n\n{e.Exception.Message}",
-                "MusicOrganizer - Erreur",
+                "Gestionnaire Musique - Erreur",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         };

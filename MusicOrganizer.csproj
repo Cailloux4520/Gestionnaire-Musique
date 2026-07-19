@@ -4,7 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
     <RootNamespace>MusicOrganizer</RootNamespace>
-    <AssemblyName>MusicOrganizer</AssemblyName>
+    <AssemblyName>Gestionnaire Musique</AssemblyName>
+    <AssemblyTitle>Gestionnaire Musique</AssemblyTitle>
+    <Product>Gestionnaire Musique</Product>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWindowsForms>true</UseWindowsForms>

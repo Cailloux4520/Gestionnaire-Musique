@@ -595,7 +595,7 @@ public static class MusicBrainzService
     private static HttpClient CreateClient()
     {
         var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
-        client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("MusicOrganizer", "1.0"));
+        client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("GestionnaireMusique", "1.0"));
         return client;
     }
 }

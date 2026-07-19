@@ -7,6 +7,8 @@ namespace MusicOrganizer;
 
 public partial class MainForm : Form
 {
+    private const string AppDisplayName = "Gestionnaire Musique";
+
     private enum ProcessingMode
     {
         Artist,
@@ -184,7 +186,7 @@ public partial class MainForm : Form
 
         if (!Directory.Exists(_settings.SourceFolder))
         {
-            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", "MusicOrganizer",
+            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -233,7 +235,7 @@ public partial class MainForm : Form
         if (failure is not null)
         {
             MessageBox.Show(this, $"La correction des styles s'est arrêtée sur une erreur inattendue :\n{failure.Message}",
-                "MusicOrganizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AppDisplayName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         else
         {
@@ -247,14 +249,14 @@ public partial class MainForm : Form
 
         if (!Directory.Exists(_settings.SourceFolder))
         {
-            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", "MusicOrganizer",
+            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(_settings.DestinationFolder))
         {
-            MessageBox.Show(this, "Veuillez indiquer un dossier de destination.", "MusicOrganizer",
+            MessageBox.Show(this, "Veuillez indiquer un dossier de destination.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -281,14 +283,14 @@ public partial class MainForm : Form
 
         if (!Directory.Exists(_settings.SourceFolder))
         {
-            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", "MusicOrganizer",
+            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(_settings.DestinationFolder))
         {
-            MessageBox.Show(this, "Veuillez indiquer un dossier de destination.", "MusicOrganizer",
+            MessageBox.Show(this, "Veuillez indiquer un dossier de destination.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -318,7 +320,7 @@ public partial class MainForm : Form
 
         if (!Directory.Exists(_settings.SourceFolder))
         {
-            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", "MusicOrganizer",
+            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -373,7 +375,7 @@ public partial class MainForm : Form
         if (failure is not null)
         {
             MessageBox.Show(this, $"La {actionLabel} s'est arrêtée sur une erreur inattendue :\n{failure.Message}",
-                "MusicOrganizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AppDisplayName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         else
         {
@@ -392,7 +394,7 @@ public partial class MainForm : Form
 
         if (!Directory.Exists(_settings.SourceFolder))
         {
-            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", "MusicOrganizer",
+            MessageBox.Show(this, "Le dossier source n'existe pas ou n'est pas renseigné.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -441,7 +443,7 @@ public partial class MainForm : Form
         if (failure is not null)
         {
             MessageBox.Show(this, $"Le tri s'est arrêté sur une erreur inattendue :\n{failure.Message}",
-                "MusicOrganizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AppDisplayName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         else
         {
@@ -461,7 +463,7 @@ public partial class MainForm : Form
 
         AppendLogLine($"--- RAPPORT FINAL ---\n{report}");
 
-        MessageBox.Show(this, report, "MusicOrganizer - Rapport final", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show(this, report, $"{AppDisplayName} - Rapport final", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private static string BuildFinalReport(OrganizerStats stats, ProcessingMode mode)
@@ -570,8 +572,8 @@ public partial class MainForm : Form
 
     private void UpdateOptionControls(bool enabled)
     {
-        _chkRecursive.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
-        _chkUseTags.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
+        _chkRecursive.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || IsDateMode());
+        _chkUseTags.Enabled = enabled && (_selectedMode == ProcessingMode.Artist || IsDateMode());
         _chkMoveCoverArt.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
         _chkFixTags.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
         _chkFingerprintDuplicates.Enabled = enabled && _selectedMode == ProcessingMode.Artist;
@@ -804,7 +806,7 @@ public partial class MainForm : Form
     {
         if (!Directory.Exists(folder))
         {
-            MessageBox.Show(this, "Ce dossier n'existe pas encore.", "MusicOrganizer",
+            MessageBox.Show(this, "Ce dossier n'existe pas encore.", AppDisplayName,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -820,7 +822,7 @@ public partial class MainForm : Form
         {
             var result = MessageBox.Show(this,
                 "Un traitement est en cours. Voulez-vous vraiment quitter et l'interrompre ?",
-                "MusicOrganizer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                AppDisplayName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.No)
             {
