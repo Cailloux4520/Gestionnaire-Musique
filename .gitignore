@@ -1,0 +1,15 @@
+bin/
+obj/
+Publish/
+Publish_Update_Mode/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+.vs/
+TestResults/
+
+*.nupkg
+*.snupkg
